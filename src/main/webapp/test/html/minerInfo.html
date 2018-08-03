@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>MachineInfoTest.HTML</title>
+<style>
+	table{
+		text-align:center;
+	}
+	td{
+		width:100px;
+		border:1px #c0c0c0 solid;
+	}
+	.MyBackground{
+		position:absolute;width:2000px;height:800px;left:0;background-color:rgb(0,0,0,0.5);
+	}
+	.BaseDiv{
+		position:absolute;left:500px;top:400px;height:auto;width:200px;border:1px #c0c0c0 solid;background-color:white;padding:3px;
+	}
+	.tag{
+		float:left;padding-left:3px;padding-right:3px;height:20px;border:1px #c0c0c0 solid;background-color:green;color:white;font-weight:550;cursor:pointer;
+	}
+	.tagClose{
+		color:red;background-color:#ecebea;
+	}
+</style>
+<div class="col-lg-7 text-center" style="font-weight:550;color:red;">MachineInfoTest.HTML</div>
+<div class="col-lg-7 text-center">加载该页面的时候顺便将3个list放到了localStorage里面方便存取</div>
+<div class="col-lg-6 text-center" id="AllInfo">
+	<table id="minerTag">
+		<tr><td colspan="6">minerTag</td></tr>
+		<tr><td>id</td><td>tagName</td><td>ownerMid</td><td>accessLevel</td><td>minerInfos</td><td>edit</td></tr>
+	</table>
+	<div class="col-lg-12 btn"></div>
+	<table id="minerInfo">
+		<tr><td colspan="8">minerInfo</td></tr>
+		<tr><td>id</td><td>machineUid</td><td>password</td><td>nickname</td><td><button onclick="selectAll(this)">selectd</button></td><td>connectState</td><td>tag</td><td>workStatus</td></tr>
+	</table>
+	
+	<div class="col-lg-12 btn"></div>
+	<table id="poolConfiguration">
+		<tr><td colspan="14">PoolConfiguration</td></tr>
+		<tr><td>id</td><td>muid</td><td>profileName</td><td>miner</td><td>fork</td><td>algo</td><td>pool</td><td>wallet</td><td>password</td><td>otherOptions</td><td colspan=3>sendToMiner</td><td>delete</td></tr>
+	</table>
+	<select id="tagSelect" class="hidden form-control">
+	</select>
+	<select id="nickNameSelect" class="hidden form-control">
+	</select>
+	<span id="TagClose" class="HOV tagClose hidden">x</span>
+</div>
+<div id="tagNameDIV" class="MyBackground hidden">
+	<div class="BaseDiv">
+		<input type="text" placeholder="tagName" name="tagName" onchange="tagNameExist(this)">
+		<input type="button" class="btn btn-success disabled" value="save" disabled="disabled" onclick="saveTag2(this)">
+		<input type="button" class="btn btn-default" value="cancel" onclick="saveTag_cancel()">
+		<input type="button" class="btn btn-danger" value="addToExistTag" onclick="addToExistTag(this)">
+	</div>
+</div>
+<div id="tagDIV" class="MyBackground hidden">
+	<div class="BaseDiv" style="width:300px;">
+		<div class="col-lg-2 pull-right" style="font-weight:550;" onclick="DIVOff($('#tagDIV'))"><span class="glyphicon glyphicon-remove btn-danger HOV"></span></div>
+		<div class="col-lg-12 text-center" style="font-weight:550;font-size:20px;color:green;border-bottom:2px #c0c0c0 solid;margin-bottom:3px;"><span>Tag</span><span class="glyphicon glyphicon-edit" style="font-size:12px;color:blue;margin-left:3px;cursor:pointer;" onclick="editTagName(this)"></span></div>
+		<div class="col-lg-12">
+			<div class="col-lg-4" style="font-weight:550;font-size:15px;color:#0080ff">minerID</div>
+			<div class="col-lg-7" style="font-weight:550;font-size:15px;color:#0080ff">minerNickName</div>
+		</div>
+		<ul class="col-lg-12">
+			
+		</ul>
+	</div>
+</div>
+<div id="configDIV" class="MyBackground hidden">
+	<div class="BaseDiv" style="width:935px;">
+		<div class="col-lg-2 pull-right" style="font-weight:550;" onclick="DIVOff($('#configDIV'))"><span class="glyphicon glyphicon-remove btn-danger HOV"></span></div>
+		<div class="col-lg-12 btn" style="font-weight:550;font-size:20px;color:green;border-bottom:2px #c0c0c0 solid;margin-bottom:3px;">Config</div>
+		<div class="col-lg-12 test-center">
+			<!-- $("#configSelect") -->
+			<select id="configSelect1" class="form-control col-lg-4" style="width:100px;height:33px;">
+			</select>
+			<select id="configSelect2" class="form-control col-lg-4" style="width:100px;height:33px;margin-left:50px;">
+				<option value="-1">无</option>
+			</select>
+			<input type="button" class="btn btn-success pull-right col-lg-4" value="Launcher" onclick="launcher()">
+		</div>
+		<table id="configInfo1"></table>
+		<table id="configInfo2"></table>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		getTags();//获取MinerTag
+		getMiners();//获取Miners
+		getPoolConfigs();//获取poolConfig
+	});
+	/***********************************************************************
+									minerTag 
+	***********************************************************************/
+	function getTags(){
+		console.log($.cookie('minerToken'));
+		$.ajax({
+			url:'/CrystalOS/rest/miner/Tag/All/MyTag',
+			type:"POST",
+			dataType:'json',
+			contentType: "application/json",
+			headers: {'Authorization': $.cookie('minerToken')},
+			cache:false,
+			success:function(data){//tagList
+				console.log(data);
+				window.localStorage.setItem("tagList",JSON.stringify(data));
+				for(var i = 0;i<data.length;i++){
+					var div ='<tr><td>'+data[i].id+'</td><td>'+data[i].tagName+'</td><td>'+data[i].ownerMid+'</td><td>'+data[i].accessLevel+'</td><td>'+data[i].minerInfos+'</td><td><button class="btn btn-info" value="edit" onclick="TagInfo('+data[i].id+')"><span class="glyphicon glyphicon-edit"></span></button></td></tr>';
+					$("#minerTag").append($(div));
+					//更新tag选择框
+					var tag = '<option value="'+data[i].tagName+'">'+data[i].tagName+'</option>';
+					$("#tagSelect").append($(tag));
+				}
+			},
+			error:function(){
+				console.log("error!");
+			},
+		});
+	}
+	/***********************************************************************
+									miner 
+	***********************************************************************/
+	function getMiners(){
+		$.ajax({
+			url:'/CrystalOS/rest/miner/myMiners',
+			type:"POST",
+			dataType:'json',
+			contentType: "application/json",
+			headers: {'Authorization': $.cookie('minerToken')},
+			cache:false,
+			success:function(data){//minerList
+				console.log(data);
+				window.localStorage.setItem("minerList",JSON.stringify(data));
+				for(var i = 0;i<data.length;i++){
+					var div = '<tr><td>'+data[i].id+'</td><td>'+data[i].machineUid+'</td><td>'+data[i].password+'</td><td>'+data[i].nickname+'</td><td><input type="checkbox" name="minerID['+i+']" value="'+data[i].id+'" onclick="tagBtn(this)"></td><td></td><td id="tag_'+data[i].id+'"></td><td></td></tr>';
+					$("#minerInfo").append($(div));
+					//更新miner选择框
+					var nickName = '<option value="'+data[i].id+'">'+data[i].nickname+'</option>';
+					$("#nickNameSelect").append($(nickName));
+				}
+				var div = '<tr><td colspan=8><input id="saveTag" type="button" class="btn btn-info disabled" disabled="disabled" value="saveAsTag" onclick="saveTag1(this)"><input type="button" class="btn btn-success disabled" disabled="disabled" value="startUp" onclick="startUp(this)"><input type="button" class="btn btn-danger" value="shutdownAll" onclick="shutDownAll()"></td></tr>';
+				$("#minerInfo").append($(div));
+				getConnecting();
+				getStatus();
+				window.setInterval("getConnecting()",30000);//获取正在连接的miner webSocket/connecting
+				window.setInterval("getStatus()",30000);
+				addTag();//添加tag
+			},
+			error:function(){
+				console.log("error!");
+			},
+		});
+	}
+	/***********************************************************************
+								poolConfiguration 
+	***********************************************************************/
+	function getPoolConfigs(){
+		$.ajax({
+			url:'/CrystalOS/rest/miner/Configs',
+			type:"POST",
+			dataType:'json',
+			contentType: "application/json",
+			headers: {'Authorization': $.cookie('minerToken')},
+			cache:false,
+			success:function(data){//poolConfigList
+				console.log(data);
+				window.localStorage.setItem("poolConfigList",JSON.stringify(data));
+				for(var i = 0;i<data.length;i++){
+					var otherOptions="";
+					$.each(data[i].otherOptions,function(i,item){
+						otherOptions = otherOptions+i+":"+item+"<br/>";
+					});
+					var div = '<tr id="cf'+data[i].id+'"><td>'+data[i].id+'</td><td>'+data[i].muid+'</td><td>'+data[i].profileName+'</td><td>'+data[i].miner+
+					'</td><td>'+data[i].fork+'</td><td>'+data[i].algo+'</td><td>'+data[i].pool+'</td><td>'+data[i].wallet+'</td><td>'
+					+data[i].password+'</td><td>'+otherOptions+
+					'</td><td><input type="button" class="btn btn-info" value="sendToAll" onclick="sendConfigToAll('+data[i].id+
+							')"></td><td><input type="button" class="btn btn-info" value="sendByTag" onclick="sendConfigByTag(this,'
+									+data[i].id+')"></td><td><input type="button" class="btn btn-info" value="sendToSingle" onclick="sendConfigToSingle(this,'
+											+data[i].id+')"></td><td><span class="glyphicon glyphicon-minus-sign HOV" style="color:red;border-radius:20px;" onclick="deletePoolConfig('+data[i].id+')"></span></td></tr>';
+					var option = '<option value="'+data[i].id+'">配置 '+data[i].id+' </option>';
+					//JSON.stringify(data[i])
+					$("#configSelect1").append($(option));
+					$("#configSelect2").append($(option));
+					$("#poolConfiguration").append($(div));
+				}
+				window.currentConfig = JSON.stringify(data[0]);
+			},
+			error:function(){
+				console.log("error!");
+			},
+		});
+	}
+</script>
+<script src="/CrystalOS/test/js/miner.js"></script>
+<script src="/CrystalOS/test/js/minerTag.js"></script>
+<script src="/CrystalOS/test/js/poolConfig.js"></script>

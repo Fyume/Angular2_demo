@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<title>CrystalOS</title>
+	<script src="/CrystalOS/lib/js/jquery-3.2.1.min.js"></script>
+	<script src="/CrystalOS/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/CrystalOS/lib/bootstrap-3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/CrystalOS/lib/font-awesome-3.0/css/font-awesome.min.css"/>
+	<link rel="shortcut icon" href="/CrystalOS/favicon.ico"/>
+	<link rel="bookmark" href="/CrystalOS/favicon.ico"/>
+	<style>
+	#topMenu{
+		white-space: nowrap;
+	}
+	div,ul{
+		float:left;
+	}
+	td{
+		text-align:center;
+		border: 0px solid !important;
+	}
+	td span{
+		cursor:default;
+	}
+	.table>tbody>tr>td,
+	.table>tbody>tr>td+td,
+	.table>tbody>tr>td+td+td{
+		text-align:left;
+	}
+	.table>tbody>tr:first-child>td{
+		padding-left:30px;
+	}
+	.table>tbody>tr>td:first-child,
+	.table>tbody>tr>td:first-child+td,
+	.table>tbody>tr>td:first-child+td+td{
+		padding-left:10px;
+	}
+	.HOV:hover{
+		box-shadow:2px 2px 2px #c0c0c0;
+		cursor:pointer;
+	}
+	/* div:hover{
+		border:1px #c0c0c0 solid;
+		box-shadow:2px 2px 2px #c0c0c0;
+	} */
+	.opacity{
+		opacity: 0.5;
+	}
+	li:hover{
+		opacity: 1;
+	}
+	ul,li{
+		text-decoration: none;
+	}
+	li{
+		list-style:none;
+		margin-left:10px;
+	}
+	body{
+		font-size:15px;
+	}
+	.menuFixed{  
+	    position:fixed;  
+	    top:0;  
+	    left:0;
+	}
+	.pointer{
+		cursor: pointer;
+	}
+	.active{
+		color:rgb(51,52,74,1);
+	}
+	.MyMenuBackground{
+		background-color:rgb(49,50,67);
+		color:white;
+	}
+	.MyPageBackground{
+		background-color:rgb(45,46,60);
+		color:white;
+	}
+	/* .MyUl li{
+		width:170px;
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
+	} */
+	.MyUl{
+		border-top:1px rgb(38,39,51) solid;
+	}
+	.MyUl li{
+		margin-top:3px;
+		margin-bottom:3px;
+		text-align:right;
+		width:170px;
+		overflow: hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
+		padding-right:10px;
+		padding-left:10px;
+	}
+	.dropdown-menu .divider{
+		background-color:rgb(217,217,217);
+		margin:auto;
+	}
+	.dropdown-menu li a:hover{
+		background-color:rgb(49,50,67);
+		color:rgb(0,230,255);
+	}
+	.MyBoxShadow{
+		box-shadow:5px 5px 5px rgb(38,39,51);
+	}
+	.NoBorder{
+		border:0;
+	}
+	/* .MySelect{
+		height:30px;border-radius:50px;border:1px rgb(41,124,200) solid;box-shadow:1px 1px 1px #c0c0c0;padding:auto;padding-left:30px;padding-right:30px;margin-top:10px;cursor:pointer;
+	} */
+	.MySelect{
+		border-radius:15px;
+		width:160px;
+		background-color:rgb(90,92,120,0.5);
+	}
+	.MySelect li{
+		height:30px;width:160px;
+	}
+	.MySelect li:hover{
+		color:orange;
+	}
+	.MySelected{
+		width:160px;border-radius:15px;height:30px;border:1px rgb(41,124,200) solid;box-shadow:0 0 5px rgb(41,124,200);text-shadow:0 0 4px white;text-align:center;padding:5px;
+	}
+	.MySelected:hover{
+		background-color:rgb(44,132,211);
+	}
+	.MyLi{
+		width:160px;padding-top:5px	;padding-left:15px;cursor:pointer;
+	}
+	
+	.dropdown-toggle{
+		padding-top:0;
+	}
+	.dropdown-menu span{
+		color:orange;
+	}
+	.glyphicon{
+		color:white;
+	}
+	.fullHeight{
+		height:100%;
+	}
+	.fullWidth{
+		width:100%;
+	}
+	.borderRadius0{
+		border-radius:0;
+	}
+	.col-lg-0.5{
+		width:4.16666667%;
+	}
+	.navbar-brand img{
+		margin-top:-5px;
+		width:170.3px;
+		background-size: auto;
+	}
+	#leftMenu{
+		box-shadow:3px 5px 5px rgb(38,39,51);
+	}
+	.leftMenuUl{
+		margin-left:-10px;
+	}
+	.leftMenuUl li{
+		margin-left:-24px;
+		margin-top:15px;
+		white-space:nowrap;
+	}
+	.leftMenuUl li div+div{
+		 margin-top:2px;
+	}
+	.dropdown-menu li a{
+		color:white;
+	}
+	.dropdown-menu li{
+		background-color:rbg(8,8,8);
+	}
+	.nav > li > a:hover,
+	.nav > li > a:focus{
+		background-color:black;
+		border:0;
+	}
+	.nav > li > a{
+		border:0;
+	}
+	.nav-tabs{
+		border:0;
+	}
+	.navbar > div{
+		padding-top:6px;
+	}
+	.close{
+		color:white;
+		cursor: pointer;
+	}
+	.close:hover{
+		color:red;
+	}
+	/*** 机器页面相关css ***/
+	.cube{
+		white-space:nowrap;
+		margin-top:30px;
+		padding-bottom:5px;
+		margin-left:10px;
+		margin-bottom:20px;
+		border-radius:12px;
+		background-color:rgb(60,61,74);
+		opacity:1;
+	}
+	.cube li{
+		margin-top:10px;
+		margin-left:-10px;
+	}
+	.cube li:first-child{
+		margin-top:15px;
+	}
+	.cube li:last-child{
+		margin-top:5px;
+	}
+	.cube li:hover{
+		color:white;
+		cursor:default;
+	}
+	.cube li:hover span{
+		color:white;
+	}
+	.GpuDiv{
+		width:100px;
+	}
+	.GpuDiv span:hover{
+		color:white;
+	}
+	.GpuDiv:hover{
+		background-color:rgb(255,119,119,0.7);
+		box-shadow:0 0 3px rgb(255,119,119,0.7);
+	}
+	.Miner{
+		background-color:rgb(60,62,84);
+	}
+	.Miner:active{
+		background-color:rgb(41,125,201,0.7);
+		box-shadow:0 0 4px rgb(41,125,201,0.7);
+	}
+	.GpuNameTdDiv{
+		border-left:4px rgb(41,125,201) solid;margin-left:-9px;padding:10px;padding-left:20px;white-space:nowrap;
+	}
+	.FriesTr{
+		background-color:rgb(49,50,67);
+	}
+	.FriesClose{
+		float:right;border-radius:15px;width:15px;height:15px;border:1px white solid;margin-top:-10px;margin-right:-15px;text-align:center;
+	}
+	.FriesClose div{
+		float:left;font-size:13px;margin-left:3px;margin-top:-3px;
+	}
+	.FriesClose:hover{
+		color:red;
+		border:1px red solid;
+		box-shadow:0 0 4px red;
+	}
+	.FriesFloatDiv{
+		width:100%;padding-right:2px;background-color:rgb(0,0,0,0.3);width:80px;border:1px white solid;box-shadow:0 0 5px white;text-align:left;border-radius:12.5px;padding:2px;padding-bottom:21px;
+	}
+	.FriesFloatDiv li{
+		cursor:pointer;
+		margin-left:-1px;
+		padding-left:10px;
+		border-radius:5px;
+		color:rgb(146,176,196);
+	}
+	.FriesFloatDiv li:hover{
+		background-color:rgb(66,66,79);
+	}
+	.FriesFloatDiv li:first-child:hover{
+		background-color:rgb(0,0,0,0.3);
+		color:orange;
+	}
+	.Cover{
+		margin-left:50px;height:1000px;background-color:rgb(0,0,0,0.6);position:absolute;top:61px;border:1px white solid;
+	}
+	</style>
+</head>
+<!-- 仅简单测试 无前端正则校验 -->
+<body class="MyPageBackground">
+	<!-- 内容页面 -->
+	<div class="MyPageBackground col-lg-12 col-sm-12" style="margin-top:61px;margin-left:50px;padding-left:20px;">
+		<div class="col-lg-11 col-sm-11 text-left MyPageBackground" id="pageView" style="padding:10px;">
+			<!-- top -->
+			<div class="col-lg-12 col-sm-12">
+				<ul id="WorkersCube" class="col-lg-1 col-sm-1 cube text-left">
+					<li class="col-lg-12 col-sm-12" style="border:2px rgb(81,81,93) solid;margin-left:5px;border-radius:30px;"></li>
+					<li class="col-lg-10 col-sm-10" style="border:2px rgb(244,51,131) solid;box-shadow:0 0 4px rgb(244,51,131);margin-left:5px;border-radius:30px;margin-top:-3.8px;"></li>
+					<li class="col-lg-12 col-sm-12"><span style="font-size:19px;">Workers</span></li>
+					<li class="col-lg-12 col-sm-12"><span style="font-weight:550;font-size:23px;">28</span> / <span style="font-weight:550;font-size:23px;color:red;text-shadow:0 0 4px red;">1</span></li>
+					<li class="col-lg-12 col-sm-12 text-right" style="margin-left:5px;">
+						<svg class="icon" style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5302">
+							<path d="M630.79033203 470.75556641c45.00966797-35.34433594 74.04433594-90.08525391 74.04433594-151.60605469 0-106.34326172-86.50634766-192.85136719-192.85048828-192.85136719-106.34501953 0-192.85136719 86.50634766-192.85136719 192.85136719 0 61.52080078 29.06542969 116.26171875 74.04609375 151.60605469C274.65576172 518.12158203 190.56640625 633.91308594 190.56640625 769.1328125v64.28320313c0 17.76708984 14.37626953 32.14248047 32.14335938 32.14248046h578.55058593c17.76621094 0 32.14160156-14.37539062 32.14160157-32.14248047v-64.28320312c0.00087891-135.25224609-84.05771484-251.01123047-202.6116211-298.37724609zM511.9859375 190.58398437c70.90664063 0 128.56816406 57.65888672 128.56816406 128.56640626S582.89257813 447.71679687 511.9859375 447.71679687 383.41601562 390.05615234 383.41601562 319.14951172s57.66152344-128.56640625 128.56904297-128.56640625z m257.1328125 610.69306641H254.85048828V769.1328125c0-141.77988281 115.35292969-257.1328125 257.16533203-257.1328125 141.78076172 0 257.10117187 115.35292969 257.10117188 257.1328125v32.14335938z" p-id="5303"></path><path d="M296.81738281 481.92998047c0.87978516-1.94589844 0.87978516-4.01748047 1.31835938-6.02666016 0.31376953-1.22431641 0.65917969-2.38447266 0.81738281-3.67207031 0.24960937-2.54267578 0.09404297-4.95791016-0.25136719-7.43818359-0.12568359-1.31835938 0.18808594-2.57431641-0.12568359-3.89179688-0.18808594-0.75410156-0.72070313-1.28759766-0.94130859-2.04169922-0.50097656-1.44316406-1.19267578-2.72988281-1.8834961-4.07988281-1.31835938-2.76328125-2.76328125-5.2734375-4.7399414-7.50058594-0.28300781-0.31376953-0.62841797-0.53349609-0.9413086-0.84726562a30.84345703 30.84345703 0 0 0-10.10742187-7.03125c-34.77832031-15.50566406-57.25283203-50.03349609-57.25283203-88.07607422 0-44.7609375 30.31962891-83.30449219 73.76132812-93.75732422 17.26347656-4.17568359 27.87275391-21.53320313 23.72958984-38.79667969-4.20644531-17.26435547-21.62724609-27.74707031-38.79667968-23.72958984-72.41308594 17.4515625-122.98007813 81.73476563-122.98007813 156.28359375 0 40.68017578 15.47490234 78.81591797 41.77880859 107.8180664C116.55458984 502.49023437 62.00175781 589.18291016 62.00175781 687.27324219v49.71972656c0 17.76621094 14.37539062 32.14160156 32.14160156 32.14160156s32.14160156-14.37539062 32.14160157-32.14160156v-49.71972656c0-88.89257813 59.76386719-165.16582031 145.51611328-186.76142578 10.67167969-1.50732422 20.37041016-8.00332031 25.0171875-18.58183594zM823.64082031 459.14082031c26.30302734-29.00214844 41.77617188-67.13964844 41.77617188-107.8180664 0-72.60117187-48.90234375-136.44492187-118.93007813-155.24648438-17.10615234-4.584375-34.74667969 5.5546875-39.39257812 22.69335938-4.61425781 17.16943359 5.55556641 34.77919922 22.69423828 39.39257812 41.99677734 11.26845703 71.34609375 49.59404297 71.34609375 93.16230469 0 38.04257812-22.44375 72.50800781-57.19042969 88.04355469-3.89091797 1.69628906-7.3125 4.05-10.26298828 7.12617187-0.25048828 0.28300781-0.56601563 0.47109375-0.81650391 0.75410156-2.00917969 2.22714844-3.45234375 4.80234375-4.80234375 7.59550782-0.65917969 1.35-1.37988281 2.60507812-1.85097656 4.01748046-0.21972656 0.72158203-0.75410156 1.28759766-0.9421875 2.04082032-0.31289062 1.31835938 0 2.57519531-0.12480469 3.89355468-0.34628906 2.47851563-0.50097656 4.89550781-0.25136718 7.43730469 0.15820313 1.28759766 0.50097656 2.44775391 0.81738281 3.67207031 0.43769531 2.00917969 0.43769531 4.08076172 1.31748047 6.02666016 4.64589844 10.57851562 14.34375 17.07626953 25.01455078 18.58183594 85.753125 21.59736328 145.51787109 97.86884766 145.51787109 186.76142578v49.71972656c0 17.76621094 14.37539062 32.14160156 32.14160157 32.14160157s32.14072266-14.37539062 32.14072265-32.14160157v-49.71972656c0.00175781-98.09208984-54.55107422-184.78564453-138.20185547-228.13417969z" p-id="5304"></path>
+						</svg>
+					</li>
+				</ul>
+				<ul id="GPUsCube" class="col-lg-1 col-sm-1 cube text-left">
+					<li class="col-lg-12 col-sm-12" style="border:2px rgb(81,81,93) solid;margin-left:5px;border-radius:30px;"></li>
+					<li class="col-lg-10 col-sm-10" style="border:2px orange solid;box-shadow:0 0 4px orange;margin-left:5px;border-radius:30px;margin-top:-3.8px;"></li>
+					<li class="col-lg-12 col-sm-12"><span style="font-size:19px;">GPU</span></li>
+					<li class="col-lg-12 col-sm-12"><span style="font-weight:550;font-size:23px;">148</span> / <span style="font-weight:550;font-size:23px;color:red;text-shadow:0 0 4px red;">3</span></li>
+					<li class="col-lg-12 col-sm-12 text-right" style="margin-left:5px;">
+						<svg class="icon" style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5646">
+							<path d="M273.042286 750.957714h477.915428V273.042286H273.042286v477.915428z m59.757714-59.757714h358.4v-358.4h-358.4v358.4zM1024 448V384h-128v-256h-256V0h-64v128h-128V0H384v128h-256v256H0v64h128v128H0v64h128v256h256V1024h64v-128h128V1024h64v-128h256v-256H1024v-64h-128v-128H1024z m-832 384h640v-640h-640v640z" p-id="5647"></path>
+						</svg>
+					</li>
+				</ul>
+				<ul id="GPUsCube" class="col-lg-1 col-sm-1 cube text-left">
+					<li class="col-lg-2 col-sm-2" style="border:2px white solid;box-shadow:0 0 4px white;margin-left:5px;border-radius:30px;"></li>
+					<!-- <li class="col-lg-10" style="border:2px orange solid;margin-left:5px;border-radius:30px;margin-top:-3.8px;"></li> -->
+					<li class="col-lg-12 col-sm-12"><span style="font-size:19px;color:rgb(60,61,74);">kW</span></li>
+					<li class="col-lg-12 col-sm-12"><span style="font-weight:550;font-size:23px;">18.70</span> kW</li>
+					<li class="col-lg-12 col-sm-12 text-right" style="margin-left:5px;">
+						<svg class="icon" style="width: 2em; height: 2em;vertical-align: middle;fill:currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5838">
+							<path d="M241.777778 569.457778V256a28.444444 28.444444 0 1 1 56.888889 0v264.704l108.529777-59.875556 162.133334 73.841778L747.52 350.008889a28.444444 28.444444 0 0 1 40.931556 39.509333L582.343111 603.107556l-172.700444-78.648889L298.666667 585.671111V682.666667h469.333333a28.444444 28.444444 0 1 1 0 56.888889H241.777778V569.457778zM796.444444 924.444444v33.194667A66.360889 66.360889 0 0 1 730.083556 1024H293.916444A66.360889 66.360889 0 0 1 227.555556 957.639111V924.444444h-45.738667A124.928 124.928 0 0 1 56.888889 799.516444V124.928A124.928 124.928 0 0 1 181.816889 0h660.366222A124.928 124.928 0 0 1 967.111111 124.928v674.588444A124.928 124.928 0 0 1 842.183111 924.444444H796.444444zM181.816889 85.333333A39.594667 39.594667 0 0 0 142.222222 124.928v674.588444A39.594667 39.594667 0 0 0 181.816889 839.111111h660.366222A39.594667 39.594667 0 0 0 881.777778 799.516444V124.928A39.594667 39.594667 0 0 0 842.183111 85.333333H181.816889z" p-id="5839"></path>
+						</svg>
+					</li>
+				</ul>
+				<div class="col-lg-6 col-sm-6 pull-left" style="height:230px;width:460px;margin-left:50px;">
+					<canvas id="hashRate"></canvas>
+				</div>
+				<div class="col-lg-1 col-sm-1 pull-left" style="margin-top:10px;margin-bottom:50px;">
+					<li style="width:80px;margin-right:15px;">
+						<a>
+							<ul id="MenuSelect2" class="col-lg-12 col-sm-12 MySelect" style="position:absolute;margin-top:-5px;width:120px;padding-left:0;">
+								<li class="MyLi">
+									<span><svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6273"><path d="M512 220.064V183.392c0-12.928-3.136-23.36-16-23.36s-16 10.432-16 23.36v36.8C288 232.96 153.12 386.656 153.12 573.664c0 195.36 157.28 354.304 350.848 354.304 193.536 0 344.192-158.944 344.192-354.304C848.16 385.664 704 231.456 512 220.064z m-8.256 661.12c-168.032 0-304.704-137.984-304.704-307.52 0-169.536 136.704-307.488 304.704-307.488s304.704 137.984 304.704 307.488c0 169.536-136.672 307.52-304.704 307.52zM802.816 342.176a22.88 22.88 0 0 0 16.384 6.848 23.2 23.2 0 0 0 16.448-6.912 23.52 23.52 0 0 0-0.064-33.056l-60.16-60.608a22.944 22.944 0 0 0-32.736 0.064 23.52 23.52 0 0 0 0.064 33.056l60.064 60.608M525.536 569.312v-187.04a23.264 23.264 0 1 0-46.464 0v197.088c0 6.464 3.296 12.608 7.968 16.96l67.84 64a22.976 22.976 0 0 0 15.936 6.368 22.4 22.4 0 0 0 16.544-7.36 23.552 23.552 0 0 0-1.28-33.056l-60.544-56.96M525.536 569.312z" p-id="6274"></path></svg></span> <span>30s</span>
+								</li>
+							</ul>
+						</a>
+					</li>
+					<li style="width:80px;position:absolute;margin-right:15px;">
+						<a>
+							<ul class="MySelected col-lg-12 col-sm-12 MyMenuBackground pointer" style="margin-top:-5px;position:absolute;border:1px white solid;box-shadow:0 0 5px white;padding-left:0;width:120px;" onclick="event.cancelBubble = true;showLi(this,2)">
+								<li id="defaultLi2" style="padding-left:-5px;padding-right:1px;">
+									<span><svg class="icon" style="width: 1.5em; height: 1.5em;vertical-align: middle;fill: currentColor;overflow: hidden;margin-top:-5px;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6273"><path d="M512 220.064V183.392c0-12.928-3.136-23.36-16-23.36s-16 10.432-16 23.36v36.8C288 232.96 153.12 386.656 153.12 573.664c0 195.36 157.28 354.304 350.848 354.304 193.536 0 344.192-158.944 344.192-354.304C848.16 385.664 704 231.456 512 220.064z m-8.256 661.12c-168.032 0-304.704-137.984-304.704-307.52 0-169.536 136.704-307.488 304.704-307.488s304.704 137.984 304.704 307.488c0 169.536-136.672 307.52-304.704 307.52zM802.816 342.176a22.88 22.88 0 0 0 16.384 6.848 23.2 23.2 0 0 0 16.448-6.912 23.52 23.52 0 0 0-0.064-33.056l-60.16-60.608a22.944 22.944 0 0 0-32.736 0.064 23.52 23.52 0 0 0 0.064 33.056l60.064 60.608M525.536 569.312v-187.04a23.264 23.264 0 1 0-46.464 0v197.088c0 6.464 3.296 12.608 7.968 16.96l67.84 64a22.976 22.976 0 0 0 15.936 6.368 22.4 22.4 0 0 0 16.544-7.36 23.552 23.552 0 0 0-1.28-33.056l-60.544-56.96M525.536 569.312z" p-id="6274"></path></svg></span> 
+									<span>30s</span> 
+									<span class="glyphicon glyphicon-chevron-down" style="font-size:7px;margin:auto;margin-right:-5px;margin-left:5px;"></span>
+								<li>
+							</ul>
+						</a>
+					</li>
+				</div>
+			</div>
+			<!-- hashRate -->
+			<div class="text-left col-lg-12 col-sm-12" style="color:#c0c0c0;margin-left:15px;">
+				Total Hashrate
+			</div>
+			<div class="col-lg-5 col-sm-5 pull-left" style="border-radius:50px;padding:5px;padding-left:10px;padding-right:10px;background-color:rgb(60,61,74);color:#c0c0c0;box-shadow:0 0 5px rgb(38,39,51);margin-top:20px;white-space: nowrap;margin-left:10px;">
+				<div class="col-lg-3 col-sm-3 text-center">
+					<span style="font-size:18px;font-weight:550;color:white;text-shadow:0 0 1px white;">X15r</span> <span>68.95 MH/s</span>
+				</div>
+				<div class="col-lg-3 col-sm-3 text-center">
+					<span style="font-size:18px;font-weight:550;color:white;text-shadow:0 0 1px white;">X16r</span> <span>68.95 MH/s</span>
+				</div>
+				<div class="col-lg-3 col-sm-3 text-center">
+					<span style="font-size:18px;font-weight:550;color:white;text-shadow:0 0 1px white;">X17r</span> <span>68.95 MH/s</span>
+				</div>
+				<div class="col-lg-3 col-sm-3 text-center">
+					<span style="font-size:18px;font-weight:550;color:white;text-shadow:0 0 1px white;">X18r</span> <span>68.95 MH/s</span>
+				</div>
+			</div>
+			<!-- 右浮动窗 -->
+			<div style="position:fixed;right:10px;top:100px;">
+				<ul class="FriesFloatDiv">
+					<li style="text-align:right;padding-right:5px;">
+						<span class="glyphicon glyphicon-chevron-down" style="font-size:6px;margin:auto;"></span>
+					</li>
+					<li>
+						aa
+					</li>
+					<li>
+						bb
+					</li>
+					<li>
+						cc
+					</li>
+				</ul>
+			</div>
+			<!-- table -->
+			<div class="col-lg-12 col-sm-12" style="margin-left:10px;">
+				<table class="table" cellspacing="0">
+					<tr style="color:#c0c0c0;"><td><div>Name</div></td><td><div>Miner</div></td><td><div>Hashrate</div></td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+					</tr>
+					<!-- one -->
+					<tr class="Miner">
+						<td class="col-lg-2">
+							<div class="GpuNameTdDiv">
+								<span>Gm01 </span><span style="color:#c0c0c0;font-size:14px;">192.168.0.87</span><br/>
+								<span>⑥</span> -- <span style="background-color:white;border-radius:50px;color:black;box-shadow:0 0 5px white;padding:5px;padding-top:2px;padding-bottom:2px;">6d 44m</span>
+								<span style="background-color:green;border-radius:50px;box-shadow:0 0 5px green;padding:5px;padding-top:2px;padding-bottom:2px;">6d 44m</span>
+							</div>
+						</td>
+						<td>
+							<div style="padding-top:20px;">
+								<span style="color:orange;">ccminer</span>
+							</div>
+						</td>
+						<td>
+							<div style="padding-top:20px">
+								<span style="font-weight:550;white-space:nowrap;">69.95</span><span style="color:#c0c0c0;"> MH/s</span>
+							</div>
+						</td>
+						<td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td>
+						<td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td>
+						<td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td>
+						<td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td><td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td><td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td>
+						<td style="width:10px;"><div style="margin-top:20px;"><span class="icon-ellipsis-vertical pointer"style="font-size:14px;"></span></div></td>
+					</tr>
+					<tr class="FriesTr">
+						<td colspan=10>
+							<div class="btn btn-default" style="background-color:rgb(60,61,74);border:0;border-radius:10px;color:white;">
+								<div>Fries</div>
+								<div class="FriesClose">
+									<div>x</div>
+								</div>
+							</div>
+
+						</td>
+					</tr>
+					<!-- two -->
+					<tr><td></td></tr>
+					<tr class="Miner">
+						<td>
+							<div class="GpuNameTdDiv">
+								<span>Gm02 </span><span style="color:#c0c0c0;font-size:14px;">192.168.0.87</span><br/>
+								<span>⑥</span> -- <span style="background-color:white;border-radius:50px;color:black;box-shadow:0 0 5px white;padding:5px;padding-top:2px;padding-bottom:2px;">6d 44m</span>
+								<span style="background-color:rgb(255,57,57);border-radius:50px;box-shadow:0 0 5px red;padding:5px;padding-top:2px;padding-bottom:2px;">Offline 6d 44m</span>
+							</div>
+						</td>
+						<td>
+							<div style="padding-top:20px;">
+								<span style="color:orange;">ccminer</span>
+							</div>
+						</td>
+						<td>
+							<div style="padding-top:20px;white-space:nowrap;">
+								<span style="font-weight:550;">69.95</span><span style="color:#c0c0c0;"> MH/s</span>
+							</div>
+						</td>
+						<td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td>
+						<td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td>
+						<td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td>
+						<td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td><td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">25</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu2" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td><td class="GpuDiv" style="padding-top:10px;">
+							<div style="position:absolute;margin:15px;margin-left:6px;"><span style="font-weight:550;">75</span><span style="color:#c0c0c0;font-size:8px;">%</span></div>
+							<div style="height:50px;width:100px;margin:auto;float:left;">
+								<canvas class="gpu" style="margin-left:-30px;"></canvas>
+							</div>
+							<div style="position:absolute;margin-left:50px;margin-top:5px;">
+								<span style="font-weight:550;">12.94</span><br/>
+								<span style="color:#c0c0c0;font-size:11px;margin-left:2px;;">67℃</span>
+							</div>
+						</td>
+						<td style="width:10px;"><div style="margin-top:20px;"><span class="icon-ellipsis-vertical pointer"style="font-size:14px;"></span></div></td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- 遮罩 -->
+	<div id="Cover" class="Cover hidden col-lg-12 col-sm-12">
+	</div>
+	<!-- 左导航栏 -->
+	<nav id="leftMenu" class="menuFixed MyMenuBackground fullHeight" style="width:50px;padding-left:10px;">
+		<ul class="leftMenuUl" style="width:100%;">
+			<li class="text-center" style="width:100%;margin-top:70px;" onclick="showLeft()">
+			
+					<!-- continue........ -->
+			
+				<a href="#"><span class="glyphicon glyphicon-align-justify" style="font-size:20px;"></span></a>
+			</li>
+			<li class="hidden" style="width:100%;margin-top:70px;">
+				<div class="col-lg-4 pull-left text-left">
+					<span style="color:rgb(90,92,120)">MENU</span>
+				</div>
+				<div class="col-lg-2 col-sm-2 pull-right text-right" style="margin-right:-30px;" onclick="closeLeft()">
+					<span class="close icon-remove"></span>
+				</div>
+			</li>
+			<li class="pointer opacity hidden" style="width:100%;float:left;margin-top:10px;padding-left:10px;">
+				<div class="col-lg-1 col-sm-1 pull-left text-left" style="margin-left:-25px;">
+					<!-- <ion-icon name="heart"></ion-icon> -->
+					<svg class="icon" style="width: 1.5em; height: 1.5em;transform:rotateY(180deg);vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2254">
+						<path d="M699.217237 188.514987l-183.908352-36.204544-36.201813 36.202496L615.58784 324.994389l-460.731733 441.423189 114.88256 114.88256 441.423872-460.732416 136.481451 136.482133 110.054059-110.054741L699.217237 188.514987zM268.109141 862.293333l-94.246229-94.246229 443.355136-424.045909 74.937003 74.937003L268.109141 862.293333z" p-id="2255"></path>
+					</svg>
+				</div>
+				<div class="col-lg-11 col-sm-11 pull-left text-left">
+					<span> MINE MANAGEMENT</span>
+				</div>
+			</li>
+			<li class="pointer opacity hidden" style="width:100%;float:left;margin-top:10px;padding-left:10px;">
+				<div class="col-lg-1 col-sm-1 pull-left text-left" style="margin-left:-25px;">
+					<svg class="icon" style="width: 1.5em; height: 1.5em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4668">
+						<path d="M840.343655 349.106026l-27.863604 0 0-100.252285c0-30.971385-25.197892-56.169277-56.171324-56.169277L605.645308 192.684464l-19.203364-30.931476c-9.496282-15.275915-27.768437-20.521383-41.597397-11.938913l-69.061912 42.871413-262.416642 0c-1.456165 0-2.867304 0.182149-4.227278 0.497327-21.928429 0.335644-42.249243 10.832719-57.32152 29.659507-14.343683 17.916045-22.242584 41.49302-22.242584 66.389036 0 12.885472 2.131547 25.408693 6.161327 36.985356-0.394996 1.514493-0.627287 3.095501-0.627287 4.733814l0 511.199775c0 30.972409 25.197892 56.170301 56.169277 56.170301l649.066749 0c30.972409 0 56.169277-25.197892 56.169277-56.170301L896.513956 405.276327C896.512932 374.303918 871.316064 349.106026 840.343655 349.106026zM859.066065 649.071865l-74.087369 0c-21.157879 0-38.370913-17.207917-38.370913-38.359656 0-21.148669 17.213034-38.353516 38.370913-38.353516l74.087369 0L859.066065 649.071865zM756.308727 230.131331c10.32516 0 18.724457 8.399297 18.724457 18.72241l0 100.252285-72.281233 0-73.861218-118.974695L756.308727 230.131331zM557.456796 186.05958l101.219309 163.046447-344.526731 0c-2.077312-0.795109-4.324492-1.249457-6.681166-1.249457l-10.658757 0L557.456796 186.05958zM181.048961 246.24431c8.070816-10.080589 18.430768-15.632025 29.17139-15.632025l97.248881 0c1.433652 0 2.824325-0.176009 4.16588-0.480954l103.823624 0L227.114113 347.046111c-0.407276 0.252757-0.788969 0.532119-1.169639 0.810459l-15.725146 0c-10.741645 0-21.100574-5.551436-29.170366-15.632025-9.046027-11.30037-14.028505-26.569122-14.028505-42.993187C167.020456 272.810363 172.001911 257.543657 181.048961 246.24431zM840.343655 860.872712 191.276906 860.872712c-10.323113 0-18.72241-8.399297-18.72241-18.723434L172.554496 385.993145c1.459235 0.36532 2.986007 0.558725 4.558829 0.558725l663.23033 0c10.324136 0 18.72241 8.399297 18.72241 18.723434l0 129.635499-74.087369 0c-41.806151 0-75.81778 34.003442-75.81778 75.800383 0 41.800012 34.011628 75.806523 75.81778 75.806523l74.087369 0 0 155.630546C859.066065 852.473415 850.667791 860.872712 840.343655 860.872712zM798.753421 628.39801c10.042727 0 18.185174-8.147564 18.185174-18.198477 0-10.057053-8.141424-18.204617-18.185174-18.204617-10.070356 0-18.21178 8.147564-18.21178 18.204617C780.542664 620.250446 788.684088 628.39801 798.753421 628.39801z" p-id="4669"></path>
+					</svg>		
+				</div>
+				<div class="col-lg-11 col-sm-11 pull-left text-left">
+					<span> WALLET MANAGEMENT</span>
+				</div>
+			</li>
+		</ul>
+	</nav>
+	<!-- 上导航栏 -->
+	<nav id="topMenu" class="navbar navbar-default menuFixed navbar-inverse col-lg-12 col-sm-12 MyMenuBackground borderRadius0 MyBoxShadow NoBorder" style="width:100%;">
+			<div class="navbar-header">
+				<div class="navbar-brand"><img title="CrystalOS" src="/CrystalOS/test/image/logo.png"></div>
+			</div>
+			<div class="pull-right">
+				<ul class="nav navbar-nav nav-tabs pull-right">
+					<!-- 修改前 -->
+					<!-- <li class="dropdown">
+						<div class="MyMenuBackground dropdown-toggle MySelect" data-toggle="dropdown">
+							<span style="font-size:17px;">Monitor</span>
+							<span class="glyphicon glyphicon-chevron-down" style="font-size:7px;margin:auto;margin-right:-5px;margin-left:5px;"></span>
+						</div>
+						<ul class="dropdown-menu pull-right MyMenuBackground text-center" style="margin-right:-10px;">
+							<li><a href="#"><span class="icon-desktop"></span> Monitor</a></li>
+							<li><a href="#"><span class="icon-bar-chart"></span> Stats</a></li>
+							<li><a href="#"><span class="icon-dashboard"></span> Rigs</a></li>
+							<li><a href="#"><span class="icon-credit-card"></span> Wallets</a></li>
+						</ul>
+					</li> -->
+					<!-- 修改后 -->
+					<li style="width:160px;margin-right:15px;">
+						<a>
+							<ul id="MenuSelect" class="col-lg-12 col-sm-12 MySelect" style="position:absolute;margin-top:-5px;">
+								<li class="MyLi">
+									<span class="icon-desktop"></span> <span>Monitor</span>
+								</li>
+							</ul>
+						</a>
+					</li>
+					<li style="width:160px;position:absolute;margin-right:15px;">
+						<a>
+							<ul class="MySelected col-lg-12 col-sm-12 MyMenuBackground pointer" style="margin-top:-5px;position:absolute;" onclick="event.cancelBubble = true;showLi(this,1)">
+								<li id="defaultLi">
+									<span class="icon-desktop"></span> <span>Monitor</span> <span class="glyphicon glyphicon-chevron-down" style="font-size:7px;margin:auto;margin-right:-5px;margin-left:5px;"></span>
+								<li>
+							</ul>
+						</a>
+					</li>
+					<li><a href="#"><span class="glyphicon glyphicon-refresh"></span></a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+					<!-- 修改前 -->
+					<!-- <li class="dropdown">		
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-user" style="font-size:21px;margin-top:-3px;"></span>
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu pull-right MyMenuBackground text-center MyUl">
+							<li class="text-center" title="预留给头像"><span class="icon-user" style="font-size:20px;"></span></li>
+							<li class="text-center" style="color:green">Fyume</li>
+							<li title="444444444@qq.comasdfasfasfdasf"><span class="glyphicon glyphicon-envelope"></span> 444444444@qq.comasdfasfasfdasf</li>
+							<li><span class="glyphicon glyphicon-phone"></span> 18888888888</li>
+							<li class="divider"></li>
+							<li>
+								<div class="col-lg-6 pull-left pointer"><span class="glyphicon glyphicon-cog"></span> 设置</div>
+								<div class="col-lg-6 pull-left pointer"><span class="glyphicon glyphicon-log-out"></span> 退出</div>
+							</li>
+						</ul>
+					</li> -->
+					<!-- 修改后 -->
+					<li class="dropdown">		
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<!-- <span class="glyphicon glyphicon-user" style="font-size:21px;margin-top:-3px;"></span> -->
+							<svg class="icon" style="width: 2em; height: 2em;margin-top:-5px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2524">
+								<path d="M757.700755 776.680844c0.036125-0.296225 0.065025-0.59245 0.0867-0.895901C757.65018 775.893318 757.570705 776.088393 757.700755 776.680844zM661.030184 417.583631c0-88.116165-71.440852-159.557017-159.549792-159.557017-88.116165 0-159.549792 71.440852-159.549792 159.557017 0 88.145065 71.433627 159.549792 159.549792 159.549792C589.589332 577.140648 661.030184 505.728695 661.030184 417.583631zM757.787455 775.784943c0.007225-0.007225 0.01445-0.021675 0.021675-0.0289l0.093925-1.069301C757.89583 775.055218 757.816355 775.416468 757.787455 775.784943zM501.545417 7.225005C224.545939 7.225005 0 231.770945 0 508.770423c0 276.977803 224.545939 501.516517 501.545417 501.516517 276.992253 0 501.538192-224.538714 501.538192-501.516517C1003.08361 231.770945 778.53767 7.225005 501.545417 7.225005zM757.715205 776.832569c-0.021675-0.079475 0-0.0867-0.01445-0.151725-0.989826 7.44898-7.282805 13.185635-14.999111 13.185635-8.409906 0-15.880562-6.777055-15.880562-15.186961-29.297396-96.706696-119.060862-167.150497-225.333465-167.150497-106.279828 0-196.484019 73.803429-225.78864 170.524575l0.411825-3.374077c0 10.078882-10.042757 15.186961-15.851662 15.186961-8.402681 0-15.194186-6.777055-15.194186-15.186961 0.4046-1.640076 0.50575-3.244027 0.968151-4.913004 0.151725-0.411825 0.21675-0.859776 0.3757-1.271601 24.817893-84.922712 90.637691-152.332012 174.780103-178.963381-64.721597-30.279997-109.64668-95.78912-109.64668-171.955126 0-104.878177 85.031087-189.945389 189.945389-189.945389 104.878177 0 189.938164 85.059987 189.938164 189.945389 0 76.166006-44.968433 141.675129-109.668355 171.940676 84.142412 26.63137 149.954985 94.055119 174.772878 178.963381 0.180625 0.411825 1.242701 5.787229 1.365526 6.19183 0.238425 0.830876 0.07225 0.946476-0.093925 1.069301L757.715205 776.832569z" p-id="2525"></path>
+							</svg>
+							<b class="caret"></b>
+						</a>
+						<ul style="position:absolute;"class="dropdown-menu pull-right MyMenuBackground text-right MyUl borderRadius0">
+							<li style="color:rgb(215,215,215);">Fyume</li>
+							<li><span class="icon-money"></span> $8848</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#" class="pull-right text-right pointer" onclick="login()"><span class="glyphicon glyphicon-log-out"></span> sign out</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+	</nav>
+</body>
+<script src="/CrystalOS/lib/js/Chart.js"></script>
+<script type="text/javascript">
+	function login(){
+		window.location.replace("/CrystalOS/test/UI_login.html");
+	}
+	var ctx = $("#hashRate")[0].getContext('2d');
+	var c1 = new Chart(ctx, {
+		type : 'line',
+		data : {
+			labels : [ "11:00", "12:00", "13:00", "14:00", "15:00",
+					"16:00", "17:00", "18:00", "19:00", "20:00", "21:00",
+					"22:00", "23:00", "24:00" ],
+			datasets : [
+					{
+						label : 'Rigs',
+						data : [ 39, 39, 39, 39, 38, 26, 38, 39, 39, 38,
+								37, 36, 39, 39 ],
+						borderColor : "#878BB6",
+						/* backgroundColor: [
+							"#878BB6",
+							"#4ACAB4", 
+							"#FFEA88",
+						] ,
+						borderWidth: 1 */
+						fill : false,
+						yAxisID : 'y-axis-1',
+					},
+					{
+						label : 'GPUs',
+						//randomColorFactor(),
+						//randomScalingFactor(),自带的随机数生成function
+						data : [ 216, 216, 216, 216, 209, 152, 209, 216,
+								216, 209, 197, 191, 216, 216 ],
+						borderColor : "#4ACAB4",
+						/* backgroundColor: [
+							"#878BB6",
+							"#4ACAB4", 
+							"#FFEA88",
+						] ,
+						borderWidth: 1 */
+						fill : false,
+						yAxisID : 'y-axis-2',
+					} ]
+		},
+		options : {
+			hover : {
+				// Overrides the global setting
+				mode : 'label'
+			},
+			tooltips : {
+				mode : 'label',//同时提示所有label
+				/* position:'nearest',*/
+				intersect : false,
+			},
+			/* title : {
+				text : "line Test",
+				display : true,
+				fontColor : 'Orange',
+			}, */
+			legend : {
+				position : 'top',
+				labels : {
+					boxWidth : 50,
+				}
+			},
+			scales : {
+				xAxes : [ {
+					position : 'bottom',
+				} ],
+				yAxes : [ {
+					ticks : {
+						beginAtZero : true
+					},
+					position : 'left',
+					id : 'y-axis-1',
+				}, {
+					ticks : {
+						beginAtZero : true
+					},
+					position : 'right',
+					id : 'y-axis-2',
+					gridLines : {
+						drawOnChartArea : false,//only want the grid lines for one axis to show up
+					}
+				} ],
+			},
+		}
+	});
+</script>
+	<!--  显卡温度显示	 -->
+	<script type="text/javascript">
+		$(".gpu").each(function(){
+		new Chart($(this)[0].getContext('2d'),{type:"doughnut",data:{"labels":["温度"],datasets:[{"data":[75,25],borderWidth:[1,0],borderColor:["red"],"backgroundColor":["red","rgb(81,81,93)"]}]},
+			options:{
+				legend: {
+					display: false, // 隐藏线条的说明（Tag）
+				},
+//			layout: {
+//				left:30,
+//			},
+			cutoutPercentage:80
+		}});
+		});
+		$(".gpu2").each(function(){
+		new Chart($(this)[0].getContext('2d'),{type:"doughnut",data:{"labels":["温度"],datasets:[{"data":[25,75],borderWidth:[1,0],borderColor:["rgb(41,171,226)"],"backgroundColor":["rgb(41,171,226)","rgb(81,81,93)"]}]},
+			options:{
+				legend: {
+					display: false, // 隐藏线条的说明（Tag）
+				},
+//			layout: {
+//				left:30,
+//			},
+			cutoutPercentage:80
+		}});
+		});
+	</script>
+<!-- 联网不好啊 -->
+<!-- <script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script> -->
+<script src="/CrystalOS/test/js/UI.js"></script>
+<script src="/CrystalOS/lib/js/jquery.uuid.js"></script>
+<script src="/CrystalOS/lib/js/jquery.serializejson.js"></script>
+<script src="/CrystalOS/lib/js/jquery.cookie.js"></script>
+<script src="/CrystalOS/test/test.js"></script>
+</html>

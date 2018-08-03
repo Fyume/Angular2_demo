@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>UserInfoTest.HTML</title>
+<style>
+	table{
+		text-align:center;
+	}
+	td{
+		width:100px;
+		border:1px #c0c0c0 solid;
+	}
+</style>
+<div class="col-lg-12">UserInfoTest.HTML</div>
+<div class="col-lg-5">
+	<table id="userInfo">
+		<tr><td colspan="6">MyInfo</td></tr>
+		<tr><td>id</td><td>username</td><td>email</td><td>password</td><td>telnum</td><td>uuid</td></tr>
+	</table>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		getMyInfo();
+	});
+	function getMyInfo(){
+		var json = JSON.parse(window.localStorage.getItem("userInfo"));
+		console.log(json);
+		var div = '<tr><td>'+json.id+'</td><td>'+json.username+'</td><td>'+json.email+'</td><td>'+json.password+'</td><td>'+json.telnum+'</td><td>'+json.uuid+'</td></tr>';
+		$(div).appendTo($("#userInfo"));
+	}
+</script>

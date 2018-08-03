@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>CrystalOS</title>
+	<script src="/CrystalOS/lib/js/jquery-3.2.1.min.js"></script>
+	<script src="/CrystalOS/lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/CrystalOS/lib/bootstrap-3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/CrystalOS/lib/font-awesome-3.0/css/font-awesome.min.css"/>
+	<link rel="shortcut icon" href="/CrystalOS/favicon.ico"/>
+	<link rel="bookmark" href="/CrystalOS/favicon.ico"/>
+	<style>
+	span:hover{
+		color:/* #ff8040 */rgb(0,230,255);
+	}
+	.HOV:hover{
+		box-shadow:2px 2px 2px #c0c0c0;
+		cursor:pointer;
+	}
+	div:hover{
+		border:1px #c0c0c0 solid;
+		box-shadow:2px 2px 2px #c0c0c0;
+	}
+	.dropdown-menu .divider{
+		background-color:rgb(217,217,217);
+		margin:auto;
+	}
+	.dropdown-menu li a:hover{
+		background-color:rgb(49,50,67);
+		color:rgb(0,230,255);
+	}
+	.MyBoxShadow{
+		box-shadow:0 0 20px rgb(38,39,51);
+	}
+	.MyMenuBackground{
+		background-color:rgb(49,50,67);
+		color:white;
+	}
+	.MyPageBackground{
+		background-color:rgb(45,46,60);
+		color:white;
+	}
+	.NoBorder{
+		border:0;
+	}
+	.AutoMargin{
+		margin:auto;position:absolute;left: 0; top: 0; right: 0; bottom: 0;
+	}
+	.dropdown-toggle{
+		padding-top:0;
+	}
+	.glyphicon{
+		color:white;
+	}
+	.fullHeight{
+		height:100%;
+	}
+	.borderRadius0{
+		border-radius:0;
+	}
+	.col-lg-0.5{
+		width:4.16666667%;
+	}
+	.navbar-brand img{
+		margin-top:-5px;
+		width:170.3px;
+		background-size: auto;
+	}
+	.leftMenuUl li:first-child{
+		margin-top:50px;
+	}
+	.nav > li > a:hover,
+	.nav > li > a:focus{
+		background-color:black;
+	}
+	</style>
+</head>
+<!-- 仅简单测试 无前端正则校验 -->
+<body class="MyMenuBackground">
+	<div class="MyMenuBackground MyBoxShadow AutoMargin" style="height:350px;width:300px;">
+		<div class="col-lg-12 col-sm-12 col-md-12" style="margin-top:20px;">
+			<div class="col-lg-12 col-sm-12 col-md-12">
+				<div class="col-lg-4 col-sm-4 col-md-4"></div>
+					<img src="/CrystalOS/test/image/logo2.png" class="col-lg-4 col-sm-4 col-md-4" style="background-size: auto;margin:auto;margin-top:15px;">
+				<div class="col-lg-4 col-sm-4 col-md-4"></div>
+			</div>
+			<div class="col-lg-12 col-sm-12 col-md-12">
+				<div class="col-lg-2 col-sm-2 col-md-2"></div>
+					<img src="/CrystalOS/test/image/logo3.png" class="col-lg-8 col-sm-8 col-md-8" style="background-size: auto;margin:auto;margin-top:15px;">
+				<div class="col-lg-2 col-sm-2 col-md-2"></div>
+			</div>
+		</div>
+		<div class="col-lg-12 col-sm-12 col-md-12" style="margin-top:20px;">
+			<div class="col-lg-2 col-sm-2 col-md-2"></div>
+			<div class="col-lg-8 col-sm-8 col-md-8"><input class="col-lg-12 col-sm-12 col-md-12 MyMenuBackground" type="text" style="border-radius:15px;" placeholder="username"></div>
+			<div class="col-lg-2 col-sm-2 col-md-2"></div>
+		</div>
+		<div class="col-lg-12 col-sm-12 col-md-12" style="margin-top:20px;">
+			<div class="col-lg-2 col-sm-2 col-md-2"></div>
+			<div class="col-lg-8 col-sm-8 col-md-8"><input class="col-lg-12 col-sm-12 col-md-12 MyMenuBackground" type="password" style="border-radius:15px;" placeholder="password"></div>
+			<div class="col-lg-2 col-sm-2 col-md-2"></div>
+		</div>
+		<div class="col-lg-12 col-sm-12 col-md-12" style="margin-top:20px;">
+			<div class="col-lg-3 col-sm-3 col-md-3"></div>
+			<div class="col-lg-6 col-sm-6 col-md-6"><input type="button" class="col-lg-12 col-sm-12 col-md-12 btn btn-primary" style="border-radius:15px;" value="Sign in" onclick="index()"></div>
+			<div class="col-lg-3 col-sm-3 col-md-3"></div>
+		</div>
+	</div>
+</body>
+<script>
+	function index(){
+		window.location.replace("/CrystalOS/test/UI_Index.html");
+	}
+</script>
+<script src="/CrystalOS/test/js/UI.js"></script>
+<script src="/CrystalOS/lib/js/jquery.uuid.js"></script>
+<script src="/CrystalOS/lib/js/jquery.serializejson.js"></script>
+<script src="/CrystalOS/lib/js/jquery.cookie.js"></script>
+<script src="/CrystalOS/test/test.js"></script>
+</html>

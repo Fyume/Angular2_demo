@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
+	table{
+		text-align:center;
+	}
+	td{
+		width:100px;
+		border:1px #c0c0c0 solid;
+	}
+</style>
+<title>walletInfo.html</title>
+<div class="col-lg-7 text-center" style="font-weight:550;color:red;">walletInfo.HTML</div>
+<div class="col-lg-6 text-center" id="AllInfo">
+	<table id="wallet">
+		<tr><td colspan="5">wallet</td></tr>
+		<tr><td>id</td><td>serverUrl</td><td>port</td><td>username</td><td>password</td><td>balance</td></tr>
+	</table>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		getWallet();
+		getWalletAdress();
+	});
+	function getWallet(){
+		$.ajax({
+			url:'/CrystalOS/rest/wallet/base',
+			type:"POST",
+			contentType: "application/json",
+			headers: {'Authorization': $.cookie('walletToken')},
+			cache:false,
+			success:function(data){//tagList
+				console.log(data);
+			//blablabla...
+			},
+			error:function(){
+				console.log("error!");
+			},
+		});
+	}
+</script>

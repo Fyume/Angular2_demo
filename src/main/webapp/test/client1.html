@@ -1,0 +1,57 @@
+<html>
+<head lang="zh-cn">
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+	var socket;
+	function getToken(){
+		$.ajax({
+			url:'/CrystalOS/WebSocket'
+		});
+	}
+	function connect(){
+	    if (!window.WebSocket) {
+	        window.WebSocket = window.MozWebSocket;
+	    }
+	    if (window.WebSocket) {
+	    	var request/*  = localStorage.getItem("webSocket") */=null;//请求server获取一个token
+	    	if(request==null){//测试用
+				//错误machineUid = D4258B910441
+				request="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtYWNoaW5lVWlkIjoiRDQyNThCOTEwNDQxIiwiZXhwIjoxNTMzMTcwNDYwMzU5fQ.KIokWJWwX0JThoouFp89ZqojTbtQyej7yKNsmeeqgFQ";
+				//machineUid=D4258B910442
+				//request = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtYWNoaW5lVWlkIjoiRDQyNThCOTEwNDQyIiwiZXhwIjoxNTMzMTY4OTQ4ODE5fQ.-qkFSRVDsYp4O5SaI8JzFinMU6jeBorBSHsENmuKhsc";
+			}
+			//无论是用户还是机器 登陆时服务器都应该将token返回 用于验证websocket时是机器还是server端页面请求
+	        socket = new WebSocket("ws://192.168.3.15:8083/websocket/?request="+request);
+	        socket.onmessage = function (event) {
+	            console.log(event.data);
+				alert(event.data);
+	        };
+	        socket.onopen = function (event) {
+	            console.log("websocket 打开了");
+	        };
+	        socket.onclose = function (event) {
+	            console.log("websocket 关闭了");
+	        };
+	    }
+	}
+    function send(message) {
+        if (!window.WebSocket) {
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            socket.send(message);
+        } else {
+            alert("The socket is not open.");
+        }
+    }
+</script>
+<input type="button" value="连接WebSocket" onclick="connect()">
+<form onsubmit="return false;">
+    <input type="text" name="message" value="Hello, World!"/>
+    <input type="button" value="Send Web Socket Data" onclick="send(this.form.message.value)"/>
+</form>
+</body>
+</html>

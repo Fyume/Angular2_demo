@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<script src="../lib/js/jquery-3.2.1.min.js"></script>
+	<script src="../lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../lib/bootstrap-3.3.7/css/bootstrap.min.css"/>
+	<link rel="shortcut icon" href="../favicon.ico"/>
+	<link rel="bookmark" href="../favicon.ico"/>
+	<style>
+	span:hover{
+		color:#ff8040;
+	}
+	.HOV:hover{
+		box-shadow:2px 2px 2px #c0c0c0;
+		cursor:pointer;
+	}
+	.or:hover{
+		color: red;
+	}
+	div:hover{
+		border:1px #c0c0c0 solid;
+		box-shadow:2px 2px 2px #c0c0c0;
+	}
+	ul,li{
+		text-decoration: none;
+	}
+	li{
+		list-style:none;
+		margin-left:10px;
+	}
+	#left li{
+		margin-top:8px;
+		width:69.92px;
+	}
+	#left li input{
+		width:69.92px;
+	}
+	#right li{
+		margin-top:2.5px;
+		width:300px;
+	}
+	#right li .form-control{
+		width:200px;
+	}
+	.form-control{
+		height:28px;
+	}
+	</style>
+</head>
+<!-- 仅简单测试 无前端正则校验 -->
+<body>
+	<div class="col-lg-8 text-center" style="color:red;font-weight:550">console输出结果</div>
+	<div class="col-lg-12">
+		<div class="col-lg-5 pull-left">
+			<div class="col-lg-5 text-center">用户注册</div><br/>
+			<form class="col-lg-5 text-center" id="form1">
+				UserName:<input name="username" type="text" onchange="userNameExist(this)"><br/>
+				PassWord:<input name="password" type="password"><br/>
+				Email:<input name="email" type="email"><br/>
+				<input type="button" class="btn btn-success" onclick="submitForm1()" value="注册">
+			</form>
+		</div>
+		<div class="col-lg-5 pull-left">
+			<div class="pull-left col-lg-5 text-center">用户登陆</div><br/>
+			<form class="col-lg-5 text-center" id="form2">
+				UserName:<input name="username" type="text"><br/>
+				PassWord:<input name="password" type="password"><br/>
+				<input type="button" id="loginBtn" class="btn btn-success" onclick="submitForm2(this)" value="登陆">
+				<input type="button" id="logOutBtn" class="btn btn-danger disabled" onclick="logOut(this)" value="登出">
+			</form>
+		</div>
+		<div class="col-lg-12"></div>
+		<div class="col-lg-5 pull-left">
+			<div class="pull-left col-lg-5 text-center">注册机器</div><br/>
+			<form class="col-lg-5 text-center" id="form3">
+				NickName:<input name="nickname" type="text" onchange="ExistNickName(this)"><br/>
+				PassWord:<input name="password" type="password" value=""><span class="glyphicon glyphicon-eye-close HOV" onclick="switchPs(this)"></span><input type="button" class="btn btn-info" onclick="random(this)" value="random"/><br/>
+				<input type="button" class="btn btn-success" onclick="submitForm3(this)" value="注册">
+			</form>
+		</div>
+		<div class="col-lg-5 pull-left"><input type="button" class="btn btn-info" value="Configuration(测试)" onclick="DIVOn($('#form4').parent())"></div>
+		<div class="col-lg-5 pull-left"><input type="button" class="btn btn-info" value="wallet(测试)" onclick="DIVOn($('#form5').parent())"></div>
+		<div class="hidden" style="z-index:1;width:500px;height:300px;background-color:white;border:1px #c0c0c0 solid;position:absolute;top:150px;left:350px;padding-left:20px;">
+			<form id="form4">
+				<div class="col-lg-11 text-center" style="color:blue;font-weight:550;">Config测试</div>
+				<div class="col-lg-1 text-center" style="font-weight:550;" onclick="DIVOff($('#form4').parent())"><span class="glyphicon glyphicon-remove btn-danger HOV"></span></div>
+				<ul class="nav pull-left" id="left">
+					<li>pool</li>
+					<li>miner</li>
+					<li>fork</li>
+					<li>algo</li>
+					<li>wallet</li>
+					<li>password</li>
+				</ul>
+				<ul class="nav pull-left" id="right">
+					<li>
+						<select name="pool" class="selectpicker form-control">
+							<option value="stratum+tcp://us.ravenminer.com:5678" selected>stratum+tcp://us.ravenminer.com:5678</option>
+							<option value="stratum+tcp://stratum.antpool.com:3333">stratum+tcp://stratum.antpool.com:3333</option>
+							<option value="pool3">pool3</option>
+							<option value="pool4">pool4</option>
+						</select> 
+					</li>
+					<li>
+						<select name="miner" class="selectpicker form-control">
+							<option value="ccminer" selected>ccminer</option>
+							<option value="claymore">claymore</option>
+						</select> 
+					</li>
+					<li><input name="fork" type="text" placeholder="fork"></li>
+					<li><input name="algo" type="text" placeholder="algo"></li>
+					<li class="input-group">
+						<input id="wallet" name="wallet" type="text" placeholder="wallet/user">
+						<select class="selectpicker input-group-prepend" id="wallet_select" style="width:100px;float:right">
+							<option value="RHXzkbifjndri5QDUaUXXMB4nS87wLHmPZ">RHXzkbifjndri5QDUaUXXMB4nS87wLHmPZ</option>
+							<option value="wallet2">wallet2</option>
+						</select> 
+					</li>
+					<li><input name="password" type="text" placeholder="password"></li>
+					<li><input type="button" class="btn btn-default" value="+" onclick="addField(this)"></li>
+					<li><input type="button" class="btn btn-success" value="Save" onclick="ConfigSave()"></li>
+				</ul>
+			</form>
+		</div>
+		<div class="hidden" style="z-index:1;width:450px;height:300px;background-color:white;border:1px #c0c0c0 solid;position:absolute;top:150px;left:350px;padding-left:20px;">
+			<form id="form5">
+				<div class="col-lg-10 text-center" style="color:blue;font-weight:550;">wallet测试</div>
+				<div class="col-lg-2 text-center" style="font-weight:550;" onclick="DIVOff($('#form5').parent())"><span class="glyphicon glyphicon-remove btn-danger HOV"></span></div>
+				<ul class="nav pull-left" id="left">
+					<li>serverUrl</li>
+					<li>port</li>
+					<li>username</li>
+					<li>password</li>
+					<li>balance</li>
+					<li>address</li>
+				</ul>
+				<ul class="nav pull-left" id="right">
+					<li><input name="serverUrl" type="text" placeholder="serverUrl"></li>
+					<li><input name="port" type="text" data-value-type="number" placeholder="port"></li>
+					<li><input name="username" type="text" placeholder="username"></li>
+					<li><input name="password" type="text" placeholder="password"></li>
+					<li><input name="balance" data-value-type="number" type="text" placeholder="balance"></li>
+					<li><input name="address[0]" type="text" placeholder="address"></li>
+					<li><input type="button" class="btn btn-default" value="+" onclick="addField2(this)"></li>
+					<li><input type="button" class="btn btn-success" value="Save" onclick="WalletSave()"></li>
+				</ul>
+			</form>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-1 pull-left">
+			<input type="button" onclick="loadHTML('/CrystalOS/test/html/test.html')" value="test">(前端测试)
+			<input type="button" onclick="loadHTML('/CrystalOS/test/html/minerInfo.html')" value="minerInfo.html">
+			<input type="button" onclick="loadHTML('/CrystalOS/test/html/userInfo.html')" value="userInfo.html">
+		</div>
+	</div>
+	<div id="view">
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		loadHTML('/CrystalOS/test/html/test.html');
+	});
+</script>
+<script src="../lib/js/jquery.uuid.js"></script>
+<script src="../lib/js/jquery.serializejson.js"></script>
+<script src="../lib/js/jquery.cookie.js"></script>
+<script src="../test/test.js"></script>
+</html>
